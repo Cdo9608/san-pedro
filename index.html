@@ -28,7 +28,6 @@
             overflow-x: hidden;
         }
 
-        /* PORTADA EXTERIOR */
         #portada {
             position: relative;
             z-index: 1;
@@ -85,7 +84,6 @@
         }
 
         .cover-inner:hover { transform: scale(1.015) translateY(-4px); }
-
         .cover-inner img { width: 100%; display: block; }
 
         .orn {
@@ -131,6 +129,7 @@
         }
 
         .p-footer-logo { width: 72px; height: 72px; object-fit: contain; }
+
         .p-footer-txt {
             font-family: 'Cinzel', serif;
             font-size: clamp(9px, 2vw, 12px);
@@ -141,6 +140,7 @@
             text-align: center;
         }
         .p-footer-txt small { display: block; font-size: .85em; color: var(--gold-light); opacity: .5; }
+
         .p-footer-qr {
             width: 88px; height: 88px;
             object-fit: contain;
@@ -151,7 +151,6 @@
             cursor: pointer;
         }
 
-        /* ========== VISOR REVISTA ========== */
         #visor {
             display: none;
             position: fixed;
@@ -174,6 +173,7 @@
             z-index: 10;
             flex-shrink: 0;
         }
+
         .btn-back {
             font-family: 'Cinzel', serif;
             font-size: 9px;
@@ -185,6 +185,7 @@
             cursor: pointer;
             border-radius: 2px;
         }
+
         .topbar-title {
             font-family: 'Cinzel', serif;
             font-size: clamp(8px,1.8vw,11px);
@@ -192,6 +193,7 @@
             color: var(--gold);
             opacity: .8;
         }
+
         .btn-audio {
             background: none;
             border: none;
@@ -203,7 +205,6 @@
         }
         .btn-audio svg { width: 24px; height: 24px; fill: currentColor; }
 
-        /* ── Stage: perspectiva 3D activa ── */
         .stage {
             flex: 1;
             display: flex;
@@ -211,33 +212,27 @@
             justify-content: center;
             overflow: hidden;
             position: relative;
-            /* PERSPECTIVE activada aquí para que rotateY se vea en 3D */
             perspective: 1800px;
             perspective-origin: center center;
         }
 
-        /* book-container: posición relativa para anclar el fold-layer */
         .book-container {
             position: relative;
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            /* preserve-3d para que los hijos hereden la perspectiva */
             transform-style: preserve-3d;
         }
 
-        /* ── Magazine ── */
         .magazine {
             position: relative;
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            /* preserve-3d para el efecto */
             transform-style: preserve-3d;
         }
 
-        /* Página individual */
         .page-single {
             position: relative;
             width: 48%;
@@ -253,7 +248,6 @@
             will-change: contents;
         }
 
-        /* Páginas dobles */
         .double-page {
             display: flex;
             width: 100%;
@@ -272,24 +266,14 @@
             will-change: contents;
         }
 
-        /* ── FOLD LAYER: capa que contiene el clon que rota en 3D ── */
-        /*
-         * Se pone dentro de .book-container con position:absolute
-         * y exactamente encima del elemento que se dobla.
-         * La rotación se aplica aquí con rotateY().
-         */
         .fold-layer {
             position: absolute;
             top: 0; left: 0;
-            /* dimensiones se asignan por JS */
             pointer-events: none;
             z-index: 50;
             transform-style: preserve-3d;
-            /* transform-origin se setea por JS según dirección */
             will-change: transform;
         }
-
-        /* Imagen clonada dentro del fold-layer */
         .fold-layer img {
             width: 100%;
             height: 100%;
@@ -298,21 +282,18 @@
             pointer-events: none;
         }
 
-        /* Gradiente de sombra encima del fold (simula el doblez) */
         .fold-shadow {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
             pointer-events: none;
             z-index: 2;
-            /* la dirección del gradiente la controla JS */
         }
 
-        /* Capa que revela la página de DESTINO detrás del fold */
         .reveal-layer {
             position: absolute;
             pointer-events: none;
-            z-index: 40;   /* debajo del fold-layer (z-index:50) */
+            z-index: 40;
             overflow: hidden;
         }
         .reveal-layer img {
@@ -322,7 +303,7 @@
             object-fit: cover;
             display: block;
         }
-        /* Sombra que recibe la página revelada (da profundidad) */
+
         .reveal-shadow {
             position: absolute;
             top: 0; left: 0;
@@ -331,21 +312,16 @@
             z-index: 2;
         }
 
-        /* Línea central (lomo del libro) para páginas dobles */
         .spine-line {
             position: absolute;
             top: 0;
             width: 3px;
             height: 100%;
-            background: linear-gradient(to bottom,
-                rgba(0,0,0,0.4) 0%,
-                rgba(0,0,0,0.7) 50%,
-                rgba(0,0,0,0.4) 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.4) 100%);
             z-index: 5;
             pointer-events: none;
         }
 
-        /* Flechas flotantes (escritorio) */
         .nav-floating {
             position: absolute;
             top: 50%;
@@ -368,7 +344,6 @@
         .nav-prev-floating { left: 10px; }
         .nav-next-floating { right: 10px; }
 
-        /* Barra inferior */
         .bottom-controls {
             padding: 12px 16px;
             background: rgba(13,4,8,0.9);
@@ -379,12 +354,14 @@
             gap: 10px;
             flex-shrink: 0;
         }
+
         .dots {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
             justify-content: center;
         }
+
         .dot {
             width: 8px; height: 8px;
             border-radius: 50%;
@@ -398,6 +375,7 @@
             width: 24px;
             border-radius: 12px;
         }
+
         .counter {
             font-family: 'Cinzel', serif;
             font-size: 10px;
@@ -405,7 +383,6 @@
             color: rgba(201,168,76,0.6);
         }
 
-        /* Navegación móvil (botones abajo) */
         .mobile-nav {
             display: none;
             gap: 20px;
@@ -433,7 +410,6 @@
 </head>
 <body>
 
-<!-- PORTADA EXTERIOR -->
 <section id="portada">
     <p class="eyebrow">✦ FIESTA PATRONAL ✦</p>
     <p class="eyebrow-sub">APÓSTOL SAN PEDRO · HNOS. LLACZA CARO · 2027</p>
@@ -455,7 +431,7 @@
             <img src="logo_orse.png" alt="Orse Atelier" class="p-footer-logo" onerror="this.style.display='none'">
         </div>
         <div class="p-footer-txt">
-		Creado por ORSE ATELIER
+            Creado por ORSE ATELIER
             <small>Diseño Web &amp; Producción Digital</small>
         </div>
         <a href="https://cdo9608.github.io/Orse-web/#home" target="_blank">
@@ -464,7 +440,6 @@
     </div>
 </section>
 
-<!-- VISOR REVISTA -->
 <section id="visor">
     <div class="topbar">
         <button class="btn-back" id="btn-back">← PORTADA</button>
@@ -498,18 +473,12 @@
 </section>
 
 <script>
-// ==================== CONFIGURACIÓN ====================
 const IMAGES = [
     'pages-1.png','pages-2.png','pages-3.png','pages-4.png',
     'pages-5.png','pages-6.png','pages-7.png','pages-8.png'
 ];
 const TOTAL_PAGES = IMAGES.length;
 
-// ─────────────────────────────────────────────────────────
-// SPREADS: cómo se agrupan las páginas
-// Escritorio: primera sola, pares en doble, última sola
-// Móvil: todas individuales
-// ─────────────────────────────────────────────────────────
 function buildSpreadsList(desktop) {
     if (!desktop) {
         return IMAGES.map((_, idx) => ({
@@ -528,45 +497,29 @@ function buildSpreadsList(desktop) {
     return s;
 }
 
-// ─────────────────────────────────────────────────────────
-// ESTADO GLOBAL
-// ─────────────────────────────────────────────────────────
-let spreads        = [];
+let spreads          = [];
 let currentSpreadIdx = 0;
-let isDesktop      = window.innerWidth >= 768;
-let busy           = false;
+let isDesktop        = window.innerWidth >= 768;
+let busy             = false;
+let dragActive       = false;
+let dragStartX       = 0;
+let dragDelta        = 0;
+let dragDir          = null;
+let foldLayer        = null;
+let foldShadow       = null;
+let foldOriginal     = null;
+let revealLayer      = null;
+let revealShadow     = null;
 
-// Drag state
-let dragActive     = false;
-let dragStartX     = 0;
-let dragDelta      = 0;
-let dragDir        = null;   // 'next' | 'prev'
-
-// Fold state
-let foldLayer      = null;   // el div que rota
-let foldShadow     = null;   // gradiente de sombra sobre el fold
-let foldOriginal   = null;   // página real oculta durante el drag
-let revealLayer    = null;   // página de DESTINO visible detrás del fold
-let revealShadow   = null;   // sombra sobre la página revelada
-
-// ─────────────────────────────────────────────────────────
-// REFERENCIAS DOM (obtenidas cuando se necesitan, no al cargar)
-// ─────────────────────────────────────────────────────────
 function getMagazine()      { return document.getElementById('magazine'); }
 function getBookContainer() { return document.getElementById('book-container'); }
 function getDotsDiv()       { return document.getElementById('dots'); }
 function getCounter()       { return document.getElementById('counter'); }
 
-// ─────────────────────────────────────────────────────────
-// RENDER — DOM fijo, solo se actualizan las src
-// ─────────────────────────────────────────────────────────
-
-// Construye la estructura fija del magazine UNA SOLA VEZ
 function buildMagazineDOM() {
     const mag = getMagazine();
     mag.innerHTML = '';
 
-    // Contenedor SINGLE (una página centrada)
     const single = document.createElement('div');
     single.className = 'page-single';
     single.id = 'mag-single';
@@ -575,7 +528,6 @@ function buildMagazineDOM() {
     imgSingle.id  = 'mag-single-img';
     single.appendChild(imgSingle);
 
-    // Contenedor DOUBLE (dos páginas lado a lado)
     const dbl = document.createElement('div');
     dbl.className = 'double-page';
     dbl.id = 'mag-double';
@@ -607,7 +559,6 @@ function buildMagazineDOM() {
     mag.appendChild(dbl);
 }
 
-// Actualiza SOLO las src y visibilidad — sin tocar el DOM
 function updateMagazineContent(spread) {
     const single    = document.getElementById('mag-single');
     const dbl       = document.getElementById('mag-double');
@@ -616,35 +567,30 @@ function updateMagazineContent(spread) {
     const imgR      = document.getElementById('mag-right-img');
 
     if (spread.type === 'single') {
-        imgSingle.src    = IMAGES[spread.pages[0]];
-        imgSingle.alt    = `Página ${spread.pages[0]+1}`;
+        imgSingle.src        = IMAGES[spread.pages[0]];
+        imgSingle.alt        = `Página ${spread.pages[0]+1}`;
         single.style.display = '';
         dbl.style.display    = 'none';
     } else {
-        imgL.src = IMAGES[spread.pages[0]];
-        imgL.alt = `Página ${spread.pages[0]+1}`;
-        imgR.src = IMAGES[spread.pages[1]];
-        imgR.alt = `Página ${spread.pages[1]+1}`;
+        imgL.src             = IMAGES[spread.pages[0]];
+        imgL.alt             = `Página ${spread.pages[0]+1}`;
+        imgR.src             = IMAGES[spread.pages[1]];
+        imgR.alt             = `Página ${spread.pages[1]+1}`;
         single.style.display = 'none';
         dbl.style.display    = '';
     }
 }
 
-// Alias para compatibilidad con el resto del código
-function renderMagazine(spread) {
-    updateMagazineContent(spread);
-}
+function renderMagazine(spread) { updateMagazineContent(spread); }
 
 function updateUI() {
     const cur = spreads[currentSpreadIdx];
     getCounter().textContent = cur.label;
-    document.querySelectorAll('.dot').forEach((d, i) => {
-        d.classList.toggle('active', i === currentSpreadIdx);
-    });
+    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === currentSpreadIdx));
     const prevBtn = document.getElementById('nav-prev-floating');
     const nextBtn = document.getElementById('nav-next-floating');
     if (prevBtn) prevBtn.style.opacity = currentSpreadIdx === 0 ? '0.3' : '1';
-    if (nextBtn) nextBtn.style.opacity = currentSpreadIdx === spreads.length-1 ? '0.3' : '1';
+    if (nextBtn) nextBtn.style.opacity = currentSpreadIdx === spreads.length - 1 ? '0.3' : '1';
 }
 
 function buildDots() {
@@ -660,9 +606,6 @@ function buildDots() {
     updateUI();
 }
 
-// ─────────────────────────────────────────────────────────
-// CAMBIO DE PÁGINA CON ANIMACIÓN 3D (al hacer clic/flecha/dots)
-// ─────────────────────────────────────────────────────────
 function goToSpread(newIdx, skipAnim) {
     if (busy) return;
     if (newIdx === currentSpreadIdx) return;
@@ -679,7 +622,6 @@ function goToSpread(newIdx, skipAnim) {
         return;
     }
 
-    // ── Determinar qué página animar ──
     const curSpread = spreads[currentSpreadIdx];
     const mag = getMagazine();
     let targetEl;
@@ -693,7 +635,6 @@ function goToSpread(newIdx, skipAnim) {
     }
 
     if (!targetEl) {
-        // Fallback sin animación
         currentSpreadIdx = newIdx;
         renderMagazine(spreads[currentSpreadIdx]);
         buildDots();
@@ -705,16 +646,12 @@ function goToSpread(newIdx, skipAnim) {
     const endAngle   = direction === 'next' ? -90 : 90;
     const destSrc    = getDestImageSrc(direction);
 
-    // Crear fold layer (con reveal debajo) encima de targetEl
     createFoldLayer(targetEl, originSide, destSrc);
 
-    // Animar hacia el ángulo final (-90 ó +90)
     foldLayer.style.transition = 'transform 0.42s cubic-bezier(0.25, 0, 0.35, 1)';
-    // Forzar reflow para que la transición arranque desde 0
     foldLayer.getBoundingClientRect();
     foldLayer.style.transform = `rotateY(${endAngle}deg)`;
 
-    // Cuando termina la rotación → mostrar nueva página
     foldLayer.addEventListener('transitionend', function onEnd() {
         foldLayer.removeEventListener('transitionend', onEnd);
         cleanFold();
@@ -730,17 +667,6 @@ function goToSpread(newIdx, skipAnim) {
 function nextPage() { goToSpread(currentSpreadIdx + 1); }
 function prevPage() { goToSpread(currentSpreadIdx - 1); }
 
-// ─────────────────────────────────────────────────────────
-// HELPERS: crear / limpiar el fold layer + reveal layer
-// ─────────────────────────────────────────────────────────
-
-/*
- * createFoldLayer(targetEl, originSide, destImageSrc)
- *
- * targetEl    → elemento DOM de la página que se DOBLA (tiene la imagen actual)
- * originSide  → 'left center' (dobla hacia la izq) | 'right center' (dobla hacia la der)
- * destImageSrc→ src de la imagen de la página de DESTINO (se muestra detrás)
- */
 function createFoldLayer(targetEl, originSide, destImageSrc) {
     cleanFold();
 
@@ -752,61 +678,38 @@ function createFoldLayer(targetEl, originSide, destImageSrc) {
     const width  = tRect.width;
     const height = tRect.height;
 
-    // ── 1. REVEAL LAYER: imagen de destino, estática, debajo del fold ──
     if (destImageSrc) {
         const revImg = document.createElement('img');
         revImg.src   = destImageSrc;
 
         revealShadow = document.createElement('div');
         revealShadow.className = 'reveal-shadow';
-        // La sombra viene desde el lado del lomo (donde rotará el fold)
         const revGradDir = originSide === 'left center' ? 'to right' : 'to left';
-        revealShadow.style.background =
-            `linear-gradient(${revGradDir}, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 60%)`;
+        revealShadow.style.background = `linear-gradient(${revGradDir}, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 60%)`;
 
         revealLayer = document.createElement('div');
         revealLayer.className = 'reveal-layer';
-        revealLayer.style.cssText = `
-            top: ${top}px;
-            left: ${left}px;
-            width: ${width}px;
-            height: ${height}px;
-        `;
+        revealLayer.style.cssText = `top:${top}px;left:${left}px;width:${width}px;height:${height}px;`;
         revealLayer.appendChild(revImg);
         revealLayer.appendChild(revealShadow);
         bookContainer.appendChild(revealLayer);
     }
 
-    // ── 2. FOLD LAYER: imagen actual, encima, rotará en 3D ──
     const cloneImg = targetEl.querySelector('img').cloneNode(true);
-    cloneImg.style.cssText = `
-        position: absolute; top: 0; left: 0;
-        width: 100%; height: 100%;
-        object-fit: cover; pointer-events: none;
-    `;
+    cloneImg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;pointer-events:none;';
 
     foldShadow = document.createElement('div');
     foldShadow.className = 'fold-shadow';
     const gradDir = originSide === 'left center' ? 'to right' : 'to left';
-    foldShadow.style.background =
-        `linear-gradient(${gradDir}, rgba(0,0,0,0) 60%, rgba(0,0,0,0.5) 100%)`;
+    foldShadow.style.background = `linear-gradient(${gradDir}, rgba(0,0,0,0) 60%, rgba(0,0,0,0.5) 100%)`;
 
     foldLayer = document.createElement('div');
     foldLayer.className = 'fold-layer';
-    foldLayer.style.cssText = `
-        top: ${top}px;
-        left: ${left}px;
-        width: ${width}px;
-        height: ${height}px;
-        transform-origin: ${originSide};
-        transform: rotateY(0deg);
-        overflow: hidden;
-    `;
+    foldLayer.style.cssText = `top:${top}px;left:${left}px;width:${width}px;height:${height}px;transform-origin:${originSide};transform:rotateY(0deg);overflow:hidden;`;
     foldLayer.appendChild(cloneImg);
     foldLayer.appendChild(foldShadow);
     bookContainer.appendChild(foldLayer);
 
-    // Ocultar la página original (el fold la reemplaza visualmente)
     foldOriginal = targetEl;
     foldOriginal.style.visibility = 'hidden';
 
@@ -819,161 +722,101 @@ function cleanFold() {
     if (foldOriginal) { foldOriginal.style.visibility = ''; foldOriginal = null; }
 }
 
-/*
- * getDestImageSrc(direction)
- * Devuelve la src de la imagen que quedará expuesta al doblar.
- *
- * Al avanzar (next):  la página derecha se dobla → detrás queda la página
- *                     izquierda del spread SIGUIENTE.
- * Al retroceder (prev): la página izquierda se dobla → detrás queda la
- *                       página derecha del spread ANTERIOR.
- */
 function getDestImageSrc(direction) {
-    const destIdx = direction === 'next'
-        ? currentSpreadIdx + 1
-        : currentSpreadIdx - 1;
-
+    const destIdx = direction === 'next' ? currentSpreadIdx + 1 : currentSpreadIdx - 1;
     if (destIdx < 0 || destIdx >= spreads.length) return null;
-
     const destSpread = spreads[destIdx];
-
-    if (destSpread.type === 'single') {
-        // Spread de destino es página única → mostramos esa imagen
-        return IMAGES[destSpread.pages[0]];
-    }
-
-    if (direction === 'next') {
-        // La hoja gira hacia la izquierda; detrás aparece la página IZQUIERDA del spread siguiente
-        return IMAGES[destSpread.pages[0]];
-    } else {
-        // La hoja gira hacia la derecha; detrás aparece la página DERECHA del spread anterior
-        return IMAGES[destSpread.pages[destSpread.pages.length - 1]];
-    }
+    if (destSpread.type === 'single') return IMAGES[destSpread.pages[0]];
+    if (direction === 'next') return IMAGES[destSpread.pages[0]];
+    return IMAGES[destSpread.pages[destSpread.pages.length - 1]];
 }
 
-// ─────────────────────────────────────────────────────────
-// DRAG (arrastre táctil / ratón) con doblez interactivo
-// ─────────────────────────────────────────────────────────
 function startDrag(e) {
     if (busy) return;
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    dragStartX    = clientX;
-    dragActive    = true;
-    dragDelta     = 0;
-    dragDir       = null;
+    dragStartX  = e.touches ? e.touches[0].clientX : e.clientX;
+    dragActive  = true;
+    dragDelta   = 0;
+    dragDir     = null;
 }
 
 function onDrag(e) {
     if (!dragActive || busy) return;
     e.preventDefault();
 
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    let delta     = clientX - dragStartX;
-
-    const mag = getMagazine();
-
-    // Límite suave
+    const clientX  = e.touches ? e.touches[0].clientX : e.clientX;
+    const mag      = getMagazine();
     const maxDelta = mag.offsetWidth * 0.5;
-    delta = Math.max(-maxDelta, Math.min(maxDelta, delta));
-    dragDelta = delta;
+    let delta      = Math.max(-maxDelta, Math.min(maxDelta, clientX - dragStartX));
+    dragDelta      = delta;
 
-    // Determinar dirección
     let dir = null;
-    if (delta > 5  && currentSpreadIdx > 0)               dir = 'prev';
+    if (delta > 5  && currentSpreadIdx > 0)                dir = 'prev';
     if (delta < -5 && currentSpreadIdx < spreads.length-1) dir = 'next';
 
     if (!dir) {
-        // No hay página a la que ir → rebote visual suave
         cleanFold();
         mag.style.transform = `translateX(${delta * 0.12}px)`;
         return;
     }
     mag.style.transform = '';
 
-    // Si la dirección cambió, reconstruir el fold
     if (dir !== dragDir) {
         dragDir = dir;
         cleanFold();
-
-        const curSpread  = spreads[currentSpreadIdx];
-        let targetEl;
-        if (curSpread.type === 'single') {
-            targetEl = mag.querySelector('.page-single');
-        } else {
-            targetEl = dir === 'next'
-                ? mag.querySelector('.page-right')
-                : mag.querySelector('.page-left');
-        }
+        const curSpread = spreads[currentSpreadIdx];
+        let targetEl = curSpread.type === 'single'
+            ? mag.querySelector('.page-single')
+            : mag.querySelector(dir === 'next' ? '.page-right' : '.page-left');
         if (!targetEl) return;
-
-        const originSide = dir === 'next' ? 'left center' : 'right center';
-        const destSrc    = getDestImageSrc(dir);
-        createFoldLayer(targetEl, originSide, destSrc);
+        createFoldLayer(targetEl, dir === 'next' ? 'left center' : 'right center', getDestImageSrc(dir));
     }
 
     if (!foldLayer) return;
 
-    // Calcular ángulo proporcional al arrastre (máx 75°)
     const progress = Math.min(1, Math.abs(delta) / maxDelta);
-    const angle    = progress * 75;
-    const rotAngle = dragDir === 'next' ? -angle : angle;
+    const rotAngle = (dragDir === 'next' ? -1 : 1) * progress * 75;
 
-    // Sin transición durante el drag (tiempo real)
     foldLayer.style.transition = 'none';
     foldLayer.style.transform  = `rotateY(${rotAngle}deg)`;
 
-    // Intensidad de la sombra proporcional al ángulo
-    const shadowAlpha = progress * 0.6;
     const gradDir = dragDir === 'next' ? 'to right' : 'to left';
-    foldShadow.style.background =
-        `linear-gradient(${gradDir}, rgba(0,0,0,0) 40%, rgba(0,0,0,${shadowAlpha}) 100%)`;
+    foldShadow.style.background = `linear-gradient(${gradDir}, rgba(0,0,0,0) 40%, rgba(0,0,0,${progress * 0.6}) 100%)`;
 
-    // La sombra sobre el reveal se reduce conforme el fold se aleja (más luz entra)
     if (revealShadow) {
         const revGradDir = dragDir === 'next' ? 'to right' : 'to left';
-        const revAlpha   = 0.35 * (1 - progress * 0.7);
-        revealShadow.style.background =
-            `linear-gradient(${revGradDir}, rgba(0,0,0,${revAlpha}) 0%, rgba(0,0,0,0) 60%)`;
+        revealShadow.style.background = `linear-gradient(${revGradDir}, rgba(0,0,0,${0.35 * (1 - progress * 0.7)}) 0%, rgba(0,0,0,0) 60%)`;
     }
 }
 
-function endDrag(e) {
+function endDrag() {
     if (!dragActive) return;
     dragActive = false;
 
     const mag = getMagazine();
     mag.style.transform = '';
 
-    const threshold = mag.offsetWidth * 0.18;
-    const shouldChange = Math.abs(dragDelta) > threshold;
+    const shouldChange = Math.abs(dragDelta) > mag.offsetWidth * 0.18;
 
     if (shouldChange && dragDir) {
-        // ── Completar la animación hacia -90 / +90 ──
         if (!foldLayer) {
-            // si por algún motivo no existe, simplemente cambiamos
-            if (dragDir === 'next') nextPage();
-            else prevPage();
+            dragDir === 'next' ? nextPage() : prevPage();
             dragDir = null;
             return;
         }
 
         busy = true;
-        const endAngle = dragDir === 'next' ? -90 : 90;
+        const endAngle    = dragDir === 'next' ? -90 : 90;
+        const capturedDir = dragDir;
+        dragDir = null;
 
         foldLayer.style.transition = 'transform 0.28s cubic-bezier(0.25, 0, 0.35, 1)';
         foldLayer.getBoundingClientRect();
         foldLayer.style.transform = `rotateY(${endAngle}deg)`;
 
-        const capturedDir = dragDir;
-        dragDir = null;
-
         foldLayer.addEventListener('transitionend', function onEnd() {
             foldLayer.removeEventListener('transitionend', onEnd);
             cleanFold();
-            const newIdx = capturedDir === 'next'
-                ? currentSpreadIdx + 1
-                : currentSpreadIdx - 1;
-            currentSpreadIdx = newIdx;
+            currentSpreadIdx = capturedDir === 'next' ? currentSpreadIdx + 1 : currentSpreadIdx - 1;
             renderMagazine(spreads[currentSpreadIdx]);
             buildDots();
             busy = false;
@@ -982,12 +825,10 @@ function endDrag(e) {
         }, { once: true });
 
     } else {
-        // ── Regresar a posición original ──
         if (foldLayer) {
             foldLayer.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
             foldLayer.getBoundingClientRect();
             foldLayer.style.transform = 'rotateY(0deg)';
-
             foldLayer.addEventListener('transitionend', function onBack() {
                 foldLayer.removeEventListener('transitionend', onBack);
                 cleanFold();
@@ -998,10 +839,10 @@ function endDrag(e) {
     dragDelta = 0;
 }
 
-// ─────────────────────────────────────────────────────────
-// SONIDO
-// ─────────────────────────────────────────────────────────
-let flipAudio = null;
+let flipAudio    = null;
+let bgAudio      = null;
+let soundEnabled = false;
+
 function playFlipSound() {
     if (!flipAudio) {
         flipAudio = new Audio('https://www.soundjay.com/misc/sounds/page-flip-01.mp3');
@@ -1011,11 +852,8 @@ function playFlipSound() {
     flipAudio.play().catch(() => {});
 }
 
-let bgAudio = null;
-let soundEnabled = false;
-
 function initBgAudio() {
-    bgAudio = new Audio('musica.mp3');
+    bgAudio = new Audio('Mix_san_pedro_de_cajas.mp3');
     bgAudio.loop = true;
     bgAudio.volume = 0.3;
     bgAudio.load();
@@ -1023,20 +861,12 @@ function initBgAudio() {
 
 function toggleSound() {
     if (!bgAudio) initBgAudio();
-    if (soundEnabled) {
-        bgAudio.pause();
-        soundEnabled = false;
-    } else {
-        bgAudio.play().catch(() => {});
-        soundEnabled = true;
-    }
+    soundEnabled = !soundEnabled;
+    soundEnabled ? bgAudio.play().catch(() => {}) : bgAudio.pause();
     document.getElementById('ico-on').style.display  = soundEnabled ? '' : 'none';
     document.getElementById('ico-off').style.display = soundEnabled ? 'none' : '';
 }
 
-// ─────────────────────────────────────────────────────────
-// ABRIR / CERRAR VISOR
-// ─────────────────────────────────────────────────────────
 function openVisor() {
     document.getElementById('portada').style.display = 'none';
     document.getElementById('visor').classList.add('active');
@@ -1044,17 +874,14 @@ function openVisor() {
     spreads = buildSpreadsList(isDesktop);
     currentSpreadIdx = 0;
 
-    // Precarga TODAS las imágenes; al terminar construye DOM fijo y renderiza
     let loaded = 0;
-    const total = IMAGES.length;
     let domBuilt = false;
 
     function tryShow() {
-        loaded++;
-        if (loaded >= total && !domBuilt) {
+        if (++loaded >= IMAGES.length && !domBuilt) {
             domBuilt = true;
             buildMagazineDOM();
-            renderMagazine(spreads[currentSpreadIdx]);
+            renderMagazine(spreads[0]);
             buildDots();
             updateUI();
         }
@@ -1062,21 +889,27 @@ function openVisor() {
 
     IMAGES.forEach(src => {
         const img = new Image();
-        img.onload  = tryShow;
-        img.onerror = tryShow;
+        img.onload = img.onerror = tryShow;
         img.src = src;
     });
 
-    // Fallback: si todas ya están en caché el navegador no dispara onload de forma asíncrona
-    // así que construimos inmediatamente también
     if (!domBuilt) {
         domBuilt = true;
         buildMagazineDOM();
-        renderMagazine(spreads[currentSpreadIdx]);
+        renderMagazine(spreads[0]);
         buildDots();
         updateUI();
-        // Las imágenes se siguen precargando en background
     }
+if (!bgAudio) initBgAudio();
+    soundEnabled = true;
+    bgAudio.currentTime = 0;
+    bgAudio.play().catch(err => {
+        console.log('Autoplay bloqueado:', err);
+        soundEnabled = false;
+    });
+
+    document.getElementById('ico-on').style.display = soundEnabled ? '' : 'none';
+    document.getElementById('ico-off').style.display = soundEnabled ? 'none' : '';
 }
 
 function closeVisor() {
@@ -1091,12 +924,7 @@ function closeVisor() {
     document.getElementById('ico-off').style.display = 'none';
 }
 
-// ─────────────────────────────────────────────────────────
-// EVENTOS — se registran cuando el DOM está completamente listo
-// ─────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function () {
-
-    // Botones principales
     document.getElementById('btn-open').addEventListener('click', openVisor);
     document.getElementById('btn-back').addEventListener('click', closeVisor);
     document.getElementById('nav-prev-floating').addEventListener('click', prevPage);
@@ -1105,23 +933,20 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('nav-next-mobile').addEventListener('click', nextPage);
     document.getElementById('btn-audio').addEventListener('click', toggleSound);
 
-    // Drag en el magazine
     const mag = document.getElementById('magazine');
     mag.addEventListener('touchstart', startDrag, { passive: true });
     mag.addEventListener('touchmove',  onDrag,    { passive: false });
     mag.addEventListener('touchend',   endDrag);
     mag.addEventListener('mousedown',  startDrag);
-    window.addEventListener('mousemove', (e) => { if (dragActive) onDrag(e); });
-    window.addEventListener('mouseup',   endDrag);
+    window.addEventListener('mousemove', e => { if (dragActive) onDrag(e); });
+    window.addEventListener('mouseup', endDrag);
 
-    // Teclado
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', e => {
         if (!document.getElementById('visor').classList.contains('active')) return;
         if (e.key === 'ArrowRight') nextPage();
         if (e.key === 'ArrowLeft')  prevPage();
     });
 
-    // Responsive
     let resizeTimer;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
@@ -1134,9 +959,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 isDesktop = newDesktop;
                 spreads = buildSpreadsList(isDesktop);
                 let newIdx = spreads.findIndex(s => s.pages.includes(currentRealPage));
-                if (newIdx === -1) newIdx = 0;
-                currentSpreadIdx = newIdx;
-                // Reconstruir DOM fijo para el nuevo layout (single ↔ double)
+                currentSpreadIdx = newIdx === -1 ? 0 : newIdx;
                 buildMagazineDOM();
                 renderMagazine(spreads[currentSpreadIdx]);
                 buildDots();
@@ -1151,5 +974,4 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 </body>
-</html>
 </html>
