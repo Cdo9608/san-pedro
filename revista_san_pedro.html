@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Fiesta Patronal · Apóstol San Pedro · Hnos. Llacza Caro</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --gold: #c9a84c;
+            --gold-light: #e8c97a;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(ellipse at center, #2d0f18 0%, #0d0408 100%);
+            font-family: 'Crimson Text', serif;
+            color: var(--gold);
+            overflow-x: hidden;
+        }
+
+        /* PORTADA EXTERIOR */
+        #portada {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 36px 16px 60px;
+            gap: 0;
+        }
+
+        .eyebrow {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(11px, 3.2vw, 17px);
+            letter-spacing: 0.42em;
+            color: var(--gold);
+            opacity: 0.82;
+            text-align: center;
+        }
+
+        .eyebrow-sub {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(8px, 2vw, 12px);
+            letter-spacing: 0.22em;
+            color: var(--gold-light);
+            opacity: 0.5;
+            text-align: center;
+            margin: 5px 0 14px;
+        }
+
+        .divider {
+            width: 100%;
+            max-width: 520px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(201,168,76,0.5), transparent);
+            margin: 4px auto 12px;
+        }
+
+        .cover-wrap {
+            width: 100%;
+            max-width: min(520px, 90vw);
+            cursor: pointer;
+            margin: 10px 0 14px;
+        }
+
+        .cover-inner {
+            position: relative;
+            border: 1px solid rgba(201,168,76,0.4);
+            border-radius: 3px;
+            overflow: hidden;
+            box-shadow: 6px 8px 0 rgba(0,0,0,0.55), 0 22px 65px rgba(0,0,0,0.88);
+            transition: transform 0.35s;
+        }
+
+        .cover-inner:hover { transform: scale(1.015) translateY(-4px); }
+
+        .cover-inner img { width: 100%; display: block; }
+
+        .orn {
+            position: absolute;
+            width: 22px; height: 22px;
+            border-color: var(--gold);
+            border-style: solid;
+            opacity: 0.5;
+        }
+        .orn-tl { top:6px; left:6px; border-width:2px 0 0 2px; }
+        .orn-tr { top:6px; right:6px; border-width:2px 2px 0 0; }
+        .orn-bl { bottom:6px; left:6px; border-width:0 0 2px 2px; }
+        .orn-br { bottom:6px; right:6px; border-width:0 2px 2px 0; }
+
+        .hint {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(9px, 2.2vw, 13px);
+            letter-spacing: 0.28em;
+            color: var(--gold-light);
+            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 10px 0 18px;
+            animation: breathe 2.8s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { opacity: 0.45; }
+            50% { opacity: 0.88; }
+        }
+
+        .p-footer {
+            width: 100%;
+            max-width: 520px;
+            border-top: 1px solid rgba(201,168,76,0.18);
+            padding: 28px 0 16px;
+            margin-top: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+        }
+
+        .p-footer-logo { width: 72px; height: 72px; object-fit: contain; }
+        .p-footer-txt {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(9px, 2vw, 12px);
+            letter-spacing: 0.12em;
+            color: var(--gold);
+            opacity: 0.65;
+            line-height: 1.9;
+            text-align: center;
+        }
+        .p-footer-txt small { display: block; font-size: .85em; color: var(--gold-light); opacity: .5; }
+        .p-footer-qr {
+            width: 88px; height: 88px;
+            object-fit: contain;
+            background: #fff;
+            border-radius: 4px;
+            padding: 4px;
+            border: 1px solid rgba(201,168,76,.3);
+            cursor: pointer;
+        }
+
+        /* ========== VISOR REVISTA ========== */
+        #visor {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(ellipse at center, #1a0a10 0%, #0d0408 100%);
+            flex-direction: column;
+            z-index: 1000;
+        }
+        #visor.active { display: flex; }
+
+        .topbar {
+            background: rgba(13,4,8,0.96);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(201,168,76,0.2);
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 10;
+            flex-shrink: 0;
+        }
+        .btn-back {
+            font-family: 'Cinzel', serif;
+            font-size: 9px;
+            letter-spacing: 0.18em;
+            color: var(--gold);
+            background: none;
+            border: 1px solid rgba(201,168,76,0.4);
+            padding: 5px 12px;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+        .topbar-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(8px,1.8vw,11px);
+            letter-spacing: .3em;
+            color: var(--gold);
+            opacity: .8;
+        }
+        .btn-audio {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            padding: 4px;
+        }
+        .btn-audio svg { width: 24px; height: 24px; fill: currentColor; }
+
+        /* ── Stage: perspectiva 3D activa ── */
+        .stage {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            /* PERSPECTIVE activada aquí para que rotateY se vea en 3D */
+            perspective: 1800px;
+            perspective-origin: center center;
+        }
+
+        /* book-container: posición relativa para anclar el fold-layer */
+        .book-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            /* preserve-3d para que los hijos hereden la perspectiva */
+            transform-style: preserve-3d;
+        }
+
+        /* ── Magazine ── */
+        .magazine {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* preserve-3d para el efecto */
+            transform-style: preserve-3d;
+        }
+
+        /* Página individual */
+        .page-single {
+            position: relative;
+            width: 48%;
+            max-width: 560px;
+            background: #000;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.7);
+        }
+        .page-single img {
+            width: 100%;
+            display: block;
+            pointer-events: none;
+            will-change: contents;
+        }
+
+        /* Páginas dobles */
+        .double-page {
+            display: flex;
+            width: 100%;
+            background: #000;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.7);
+        }
+        .double-page .page {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+        .double-page .page img {
+            width: 100%;
+            display: block;
+            pointer-events: none;
+            will-change: contents;
+        }
+
+        /* ── FOLD LAYER: capa que contiene el clon que rota en 3D ── */
+        /*
+         * Se pone dentro de .book-container con position:absolute
+         * y exactamente encima del elemento que se dobla.
+         * La rotación se aplica aquí con rotateY().
+         */
+        .fold-layer {
+            position: absolute;
+            top: 0; left: 0;
+            /* dimensiones se asignan por JS */
+            pointer-events: none;
+            z-index: 50;
+            transform-style: preserve-3d;
+            /* transform-origin se setea por JS según dirección */
+            will-change: transform;
+        }
+
+        /* Imagen clonada dentro del fold-layer */
+        .fold-layer img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+        }
+
+        /* Gradiente de sombra encima del fold (simula el doblez) */
+        .fold-shadow {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            /* la dirección del gradiente la controla JS */
+        }
+
+        /* Capa que revela la página de DESTINO detrás del fold */
+        .reveal-layer {
+            position: absolute;
+            pointer-events: none;
+            z-index: 40;   /* debajo del fold-layer (z-index:50) */
+            overflow: hidden;
+        }
+        .reveal-layer img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        /* Sombra que recibe la página revelada (da profundidad) */
+        .reveal-shadow {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Línea central (lomo del libro) para páginas dobles */
+        .spine-line {
+            position: absolute;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom,
+                rgba(0,0,0,0.4) 0%,
+                rgba(0,0,0,0.7) 50%,
+                rgba(0,0,0,0.4) 100%);
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        /* Flechas flotantes (escritorio) */
+        .nav-floating {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px; height: 48px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(201,168,76,0.5);
+            border-radius: 50%;
+            color: var(--gold);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 30;
+            transition: all 0.2s;
+        }
+        .nav-floating:hover { background: rgba(201,168,76,0.3); }
+        .nav-floating svg { width: 28px; height: 28px; fill: currentColor; }
+        .nav-prev-floating { left: 10px; }
+        .nav-next-floating { right: 10px; }
+
+        /* Barra inferior */
+        .bottom-controls {
+            padding: 12px 16px;
+            background: rgba(13,4,8,0.9);
+            border-top: 1px solid rgba(201,168,76,0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+        .dots {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: rgba(201,168,76,0.3);
+            border: 1px solid rgba(201,168,76,0.6);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .dot.active {
+            background: var(--gold);
+            width: 24px;
+            border-radius: 12px;
+        }
+        .counter {
+            font-family: 'Cinzel', serif;
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            color: rgba(201,168,76,0.6);
+        }
+
+        /* Navegación móvil (botones abajo) */
+        .mobile-nav {
+            display: none;
+            gap: 20px;
+            justify-content: center;
+            width: 100%;
+        }
+        .mobile-nav button {
+            background: rgba(201,168,76,0.2);
+            border: 1px solid rgba(201,168,76,0.5);
+            border-radius: 40px;
+            padding: 8px 24px;
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+            cursor: pointer;
+        }
+
+        @media (max-width: 640px) {
+            .nav-floating { display: none; }
+            .mobile-nav { display: flex; }
+            .page-single { width: 90%; max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- PORTADA EXTERIOR -->
+<section id="portada">
+    <p class="eyebrow">✦ FIESTA PATRONAL ✦</p>
+    <p class="eyebrow-sub">APÓSTOL SAN PEDRO · HNOS. LLACZA CARO · 2027</p>
+    <div class="divider"></div>
+    <div class="cover-wrap" id="btn-open">
+        <div class="cover-inner">
+            <div class="orn orn-tl"></div><div class="orn orn-tr"></div>
+            <div class="orn orn-bl"></div><div class="orn orn-br"></div>
+            <img src="pages-1.jpg" alt="Portada">
+        </div>
+    </div>
+    <div class="hint">
+        <svg viewBox="0 0 24 24" width="15" height="15"><path d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zm9.84 4.63l-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74l-3.43-.72c-.08-.01-.15-.03-.24-.03-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38z"/></svg>
+        Toca la portada para abrir el folleto
+    </div>
+    <div class="divider"></div>
+    <div class="p-footer">
+        <div>
+            <img src="logo_orse.png" alt="Orse Atelier" class="p-footer-logo" onerror="this.style.display='none'">
+        </div>
+        <div class="p-footer-txt">
+		Creado por ORSE ATELIER
+            <small>Diseño Web &amp; Producción Digital</small>
+        </div>
+        <a href="https://cdo9608.github.io/Orse-web/#home" target="_blank">
+            <img src="qr_orse.png" alt="QR" class="p-footer-qr" onerror="this.style.display='none'">
+        </a>
+    </div>
+</section>
+
+<!-- VISOR REVISTA -->
+<section id="visor">
+    <div class="topbar">
+        <button class="btn-back" id="btn-back">← PORTADA</button>
+        <div class="topbar-title">Apóstol San Pedro</div>
+        <button class="btn-audio" id="btn-audio">
+            <svg id="ico-on" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+            <svg id="ico-off" viewBox="0 0 24 24" style="display:none"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+        </button>
+    </div>
+
+    <div class="stage" id="stage">
+        <div class="book-container" id="book-container">
+            <button class="nav-floating nav-prev-floating" id="nav-prev-floating">
+                <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+            </button>
+            <div class="magazine" id="magazine"></div>
+            <button class="nav-floating nav-next-floating" id="nav-next-floating">
+                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="bottom-controls">
+        <div class="dots" id="dots"></div>
+        <div class="counter" id="counter"></div>
+        <div class="mobile-nav">
+            <button id="nav-prev-mobile">◀ ANTERIOR</button>
+            <button id="nav-next-mobile">SIGUIENTE ▶</button>
+        </div>
+    </div>
+</section>
+
+<script>
+// ==================== CONFIGURACIÓN ====================
+const IMAGES = [
+    'pages-1.png','pages-2.png','pages-3.png','pages-4.png',
+    'pages-5.png','pages-6.png','pages-7.png','pages-8.png'
+];
+const TOTAL_PAGES = IMAGES.length;
+
+// ─────────────────────────────────────────────────────────
+// SPREADS: cómo se agrupan las páginas
+// Escritorio: primera sola, pares en doble, última sola
+// Móvil: todas individuales
+// ─────────────────────────────────────────────────────────
+function buildSpreadsList(desktop) {
+    if (!desktop) {
+        return IMAGES.map((_, idx) => ({
+            type: 'single', pages: [idx],
+            label: `${idx+1} de ${TOTAL_PAGES}`
+        }));
+    }
+    const s = [];
+    s.push({ type: 'single', pages: [0], label: `1 de ${TOTAL_PAGES}` });
+    for (let i = 1; i < TOTAL_PAGES - 1; i += 2) {
+        if (i + 1 < TOTAL_PAGES) {
+            s.push({ type: 'double', pages: [i, i+1], label: `${i+1}–${i+2} de ${TOTAL_PAGES}` });
+        }
+    }
+    s.push({ type: 'single', pages: [TOTAL_PAGES-1], label: `${TOTAL_PAGES} de ${TOTAL_PAGES}` });
+    return s;
+}
+
+// ─────────────────────────────────────────────────────────
+// ESTADO GLOBAL
+// ─────────────────────────────────────────────────────────
+let spreads        = [];
+let currentSpreadIdx = 0;
+let isDesktop      = window.innerWidth >= 768;
+let busy           = false;
+
+// Drag state
+let dragActive     = false;
+let dragStartX     = 0;
+let dragDelta      = 0;
+let dragDir        = null;   // 'next' | 'prev'
+
+// Fold state
+let foldLayer      = null;   // el div que rota
+let foldShadow     = null;   // gradiente de sombra sobre el fold
+let foldOriginal   = null;   // página real oculta durante el drag
+let revealLayer    = null;   // página de DESTINO visible detrás del fold
+let revealShadow   = null;   // sombra sobre la página revelada
+
+// ─────────────────────────────────────────────────────────
+// REFERENCIAS DOM (obtenidas cuando se necesitan, no al cargar)
+// ─────────────────────────────────────────────────────────
+function getMagazine()      { return document.getElementById('magazine'); }
+function getBookContainer() { return document.getElementById('book-container'); }
+function getDotsDiv()       { return document.getElementById('dots'); }
+function getCounter()       { return document.getElementById('counter'); }
+
+// ─────────────────────────────────────────────────────────
+// RENDER — DOM fijo, solo se actualizan las src
+// ─────────────────────────────────────────────────────────
+
+// Construye la estructura fija del magazine UNA SOLA VEZ
+function buildMagazineDOM() {
+    const mag = getMagazine();
+    mag.innerHTML = '';
+
+    // Contenedor SINGLE (una página centrada)
+    const single = document.createElement('div');
+    single.className = 'page-single';
+    single.id = 'mag-single';
+    const imgSingle = document.createElement('img');
+    imgSingle.alt = 'Página';
+    imgSingle.id  = 'mag-single-img';
+    single.appendChild(imgSingle);
+
+    // Contenedor DOUBLE (dos páginas lado a lado)
+    const dbl = document.createElement('div');
+    dbl.className = 'double-page';
+    dbl.id = 'mag-double';
+
+    const left = document.createElement('div');
+    left.className = 'page page-left';
+    const imgL = document.createElement('img');
+    imgL.alt = 'Página izquierda';
+    imgL.id  = 'mag-left-img';
+    left.appendChild(imgL);
+
+    const spine = document.createElement('div');
+    spine.className = 'spine-line';
+    spine.style.left = '50%';
+    spine.style.transform = 'translateX(-50%)';
+
+    const right = document.createElement('div');
+    right.className = 'page page-right';
+    const imgR = document.createElement('img');
+    imgR.alt = 'Página derecha';
+    imgR.id  = 'mag-right-img';
+    right.appendChild(imgR);
+
+    dbl.appendChild(left);
+    dbl.appendChild(spine);
+    dbl.appendChild(right);
+
+    mag.appendChild(single);
+    mag.appendChild(dbl);
+}
+
+// Actualiza SOLO las src y visibilidad — sin tocar el DOM
+function updateMagazineContent(spread) {
+    const single    = document.getElementById('mag-single');
+    const dbl       = document.getElementById('mag-double');
+    const imgSingle = document.getElementById('mag-single-img');
+    const imgL      = document.getElementById('mag-left-img');
+    const imgR      = document.getElementById('mag-right-img');
+
+    if (spread.type === 'single') {
+        imgSingle.src    = IMAGES[spread.pages[0]];
+        imgSingle.alt    = `Página ${spread.pages[0]+1}`;
+        single.style.display = '';
+        dbl.style.display    = 'none';
+    } else {
+        imgL.src = IMAGES[spread.pages[0]];
+        imgL.alt = `Página ${spread.pages[0]+1}`;
+        imgR.src = IMAGES[spread.pages[1]];
+        imgR.alt = `Página ${spread.pages[1]+1}`;
+        single.style.display = 'none';
+        dbl.style.display    = '';
+    }
+}
+
+// Alias para compatibilidad con el resto del código
+function renderMagazine(spread) {
+    updateMagazineContent(spread);
+}
+
+function updateUI() {
+    const cur = spreads[currentSpreadIdx];
+    getCounter().textContent = cur.label;
+    document.querySelectorAll('.dot').forEach((d, i) => {
+        d.classList.toggle('active', i === currentSpreadIdx);
+    });
+    const prevBtn = document.getElementById('nav-prev-floating');
+    const nextBtn = document.getElementById('nav-next-floating');
+    if (prevBtn) prevBtn.style.opacity = currentSpreadIdx === 0 ? '0.3' : '1';
+    if (nextBtn) nextBtn.style.opacity = currentSpreadIdx === spreads.length-1 ? '0.3' : '1';
+}
+
+function buildDots() {
+    const dotsDiv = getDotsDiv();
+    dotsDiv.innerHTML = '';
+    spreads.forEach((_, idx) => {
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+        if (idx === currentSpreadIdx) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSpread(idx));
+        dotsDiv.appendChild(dot);
+    });
+    updateUI();
+}
+
+// ─────────────────────────────────────────────────────────
+// CAMBIO DE PÁGINA CON ANIMACIÓN 3D (al hacer clic/flecha/dots)
+// ─────────────────────────────────────────────────────────
+function goToSpread(newIdx, skipAnim) {
+    if (busy) return;
+    if (newIdx === currentSpreadIdx) return;
+    if (newIdx < 0 || newIdx >= spreads.length) return;
+
+    busy = true;
+    const direction = newIdx > currentSpreadIdx ? 'next' : 'prev';
+
+    if (skipAnim) {
+        currentSpreadIdx = newIdx;
+        renderMagazine(spreads[currentSpreadIdx]);
+        buildDots();
+        busy = false;
+        return;
+    }
+
+    // ── Determinar qué página animar ──
+    const curSpread = spreads[currentSpreadIdx];
+    const mag = getMagazine();
+    let targetEl;
+
+    if (curSpread.type === 'single') {
+        targetEl = mag.querySelector('.page-single');
+    } else {
+        targetEl = direction === 'next'
+            ? mag.querySelector('.page-right')
+            : mag.querySelector('.page-left');
+    }
+
+    if (!targetEl) {
+        // Fallback sin animación
+        currentSpreadIdx = newIdx;
+        renderMagazine(spreads[currentSpreadIdx]);
+        buildDots();
+        busy = false;
+        return;
+    }
+
+    const originSide = direction === 'next' ? 'left center' : 'right center';
+    const endAngle   = direction === 'next' ? -90 : 90;
+    const destSrc    = getDestImageSrc(direction);
+
+    // Crear fold layer (con reveal debajo) encima de targetEl
+    createFoldLayer(targetEl, originSide, destSrc);
+
+    // Animar hacia el ángulo final (-90 ó +90)
+    foldLayer.style.transition = 'transform 0.42s cubic-bezier(0.25, 0, 0.35, 1)';
+    // Forzar reflow para que la transición arranque desde 0
+    foldLayer.getBoundingClientRect();
+    foldLayer.style.transform = `rotateY(${endAngle}deg)`;
+
+    // Cuando termina la rotación → mostrar nueva página
+    foldLayer.addEventListener('transitionend', function onEnd() {
+        foldLayer.removeEventListener('transitionend', onEnd);
+        cleanFold();
+        currentSpreadIdx = newIdx;
+        renderMagazine(spreads[currentSpreadIdx]);
+        buildDots();
+        busy = false;
+        playFlipSound();
+        updateUI();
+    }, { once: true });
+}
+
+function nextPage() { goToSpread(currentSpreadIdx + 1); }
+function prevPage() { goToSpread(currentSpreadIdx - 1); }
+
+// ─────────────────────────────────────────────────────────
+// HELPERS: crear / limpiar el fold layer + reveal layer
+// ─────────────────────────────────────────────────────────
+
+/*
+ * createFoldLayer(targetEl, originSide, destImageSrc)
+ *
+ * targetEl    → elemento DOM de la página que se DOBLA (tiene la imagen actual)
+ * originSide  → 'left center' (dobla hacia la izq) | 'right center' (dobla hacia la der)
+ * destImageSrc→ src de la imagen de la página de DESTINO (se muestra detrás)
+ */
+function createFoldLayer(targetEl, originSide, destImageSrc) {
+    cleanFold();
+
+    const bookContainer = getBookContainer();
+    const tRect  = targetEl.getBoundingClientRect();
+    const bRect  = bookContainer.getBoundingClientRect();
+    const top    = tRect.top  - bRect.top;
+    const left   = tRect.left - bRect.left;
+    const width  = tRect.width;
+    const height = tRect.height;
+
+    // ── 1. REVEAL LAYER: imagen de destino, estática, debajo del fold ──
+    if (destImageSrc) {
+        const revImg = document.createElement('img');
+        revImg.src   = destImageSrc;
+
+        revealShadow = document.createElement('div');
+        revealShadow.className = 'reveal-shadow';
+        // La sombra viene desde el lado del lomo (donde rotará el fold)
+        const revGradDir = originSide === 'left center' ? 'to right' : 'to left';
+        revealShadow.style.background =
+            `linear-gradient(${revGradDir}, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 60%)`;
+
+        revealLayer = document.createElement('div');
+        revealLayer.className = 'reveal-layer';
+        revealLayer.style.cssText = `
+            top: ${top}px;
+            left: ${left}px;
+            width: ${width}px;
+            height: ${height}px;
+        `;
+        revealLayer.appendChild(revImg);
+        revealLayer.appendChild(revealShadow);
+        bookContainer.appendChild(revealLayer);
+    }
+
+    // ── 2. FOLD LAYER: imagen actual, encima, rotará en 3D ──
+    const cloneImg = targetEl.querySelector('img').cloneNode(true);
+    cloneImg.style.cssText = `
+        position: absolute; top: 0; left: 0;
+        width: 100%; height: 100%;
+        object-fit: cover; pointer-events: none;
+    `;
+
+    foldShadow = document.createElement('div');
+    foldShadow.className = 'fold-shadow';
+    const gradDir = originSide === 'left center' ? 'to right' : 'to left';
+    foldShadow.style.background =
+        `linear-gradient(${gradDir}, rgba(0,0,0,0) 60%, rgba(0,0,0,0.5) 100%)`;
+
+    foldLayer = document.createElement('div');
+    foldLayer.className = 'fold-layer';
+    foldLayer.style.cssText = `
+        top: ${top}px;
+        left: ${left}px;
+        width: ${width}px;
+        height: ${height}px;
+        transform-origin: ${originSide};
+        transform: rotateY(0deg);
+        overflow: hidden;
+    `;
+    foldLayer.appendChild(cloneImg);
+    foldLayer.appendChild(foldShadow);
+    bookContainer.appendChild(foldLayer);
+
+    // Ocultar la página original (el fold la reemplaza visualmente)
+    foldOriginal = targetEl;
+    foldOriginal.style.visibility = 'hidden';
+
+    return foldLayer;
+}
+
+function cleanFold() {
+    if (foldLayer)    { foldLayer.remove();   foldLayer = null; foldShadow = null; }
+    if (revealLayer)  { revealLayer.remove(); revealLayer = null; revealShadow = null; }
+    if (foldOriginal) { foldOriginal.style.visibility = ''; foldOriginal = null; }
+}
+
+/*
+ * getDestImageSrc(direction)
+ * Devuelve la src de la imagen que quedará expuesta al doblar.
+ *
+ * Al avanzar (next):  la página derecha se dobla → detrás queda la página
+ *                     izquierda del spread SIGUIENTE.
+ * Al retroceder (prev): la página izquierda se dobla → detrás queda la
+ *                       página derecha del spread ANTERIOR.
+ */
+function getDestImageSrc(direction) {
+    const destIdx = direction === 'next'
+        ? currentSpreadIdx + 1
+        : currentSpreadIdx - 1;
+
+    if (destIdx < 0 || destIdx >= spreads.length) return null;
+
+    const destSpread = spreads[destIdx];
+
+    if (destSpread.type === 'single') {
+        // Spread de destino es página única → mostramos esa imagen
+        return IMAGES[destSpread.pages[0]];
+    }
+
+    if (direction === 'next') {
+        // La hoja gira hacia la izquierda; detrás aparece la página IZQUIERDA del spread siguiente
+        return IMAGES[destSpread.pages[0]];
+    } else {
+        // La hoja gira hacia la derecha; detrás aparece la página DERECHA del spread anterior
+        return IMAGES[destSpread.pages[destSpread.pages.length - 1]];
+    }
+}
+
+// ─────────────────────────────────────────────────────────
+// DRAG (arrastre táctil / ratón) con doblez interactivo
+// ─────────────────────────────────────────────────────────
+function startDrag(e) {
+    if (busy) return;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    dragStartX    = clientX;
+    dragActive    = true;
+    dragDelta     = 0;
+    dragDir       = null;
+}
+
+function onDrag(e) {
+    if (!dragActive || busy) return;
+    e.preventDefault();
+
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    let delta     = clientX - dragStartX;
+
+    const mag = getMagazine();
+
+    // Límite suave
+    const maxDelta = mag.offsetWidth * 0.5;
+    delta = Math.max(-maxDelta, Math.min(maxDelta, delta));
+    dragDelta = delta;
+
+    // Determinar dirección
+    let dir = null;
+    if (delta > 5  && currentSpreadIdx > 0)               dir = 'prev';
+    if (delta < -5 && currentSpreadIdx < spreads.length-1) dir = 'next';
+
+    if (!dir) {
+        // No hay página a la que ir → rebote visual suave
+        cleanFold();
+        mag.style.transform = `translateX(${delta * 0.12}px)`;
+        return;
+    }
+    mag.style.transform = '';
+
+    // Si la dirección cambió, reconstruir el fold
+    if (dir !== dragDir) {
+        dragDir = dir;
+        cleanFold();
+
+        const curSpread  = spreads[currentSpreadIdx];
+        let targetEl;
+        if (curSpread.type === 'single') {
+            targetEl = mag.querySelector('.page-single');
+        } else {
+            targetEl = dir === 'next'
+                ? mag.querySelector('.page-right')
+                : mag.querySelector('.page-left');
+        }
+        if (!targetEl) return;
+
+        const originSide = dir === 'next' ? 'left center' : 'right center';
+        const destSrc    = getDestImageSrc(dir);
+        createFoldLayer(targetEl, originSide, destSrc);
+    }
+
+    if (!foldLayer) return;
+
+    // Calcular ángulo proporcional al arrastre (máx 75°)
+    const progress = Math.min(1, Math.abs(delta) / maxDelta);
+    const angle    = progress * 75;
+    const rotAngle = dragDir === 'next' ? -angle : angle;
+
+    // Sin transición durante el drag (tiempo real)
+    foldLayer.style.transition = 'none';
+    foldLayer.style.transform  = `rotateY(${rotAngle}deg)`;
+
+    // Intensidad de la sombra proporcional al ángulo
+    const shadowAlpha = progress * 0.6;
+    const gradDir = dragDir === 'next' ? 'to right' : 'to left';
+    foldShadow.style.background =
+        `linear-gradient(${gradDir}, rgba(0,0,0,0) 40%, rgba(0,0,0,${shadowAlpha}) 100%)`;
+
+    // La sombra sobre el reveal se reduce conforme el fold se aleja (más luz entra)
+    if (revealShadow) {
+        const revGradDir = dragDir === 'next' ? 'to right' : 'to left';
+        const revAlpha   = 0.35 * (1 - progress * 0.7);
+        revealShadow.style.background =
+            `linear-gradient(${revGradDir}, rgba(0,0,0,${revAlpha}) 0%, rgba(0,0,0,0) 60%)`;
+    }
+}
+
+function endDrag(e) {
+    if (!dragActive) return;
+    dragActive = false;
+
+    const mag = getMagazine();
+    mag.style.transform = '';
+
+    const threshold = mag.offsetWidth * 0.18;
+    const shouldChange = Math.abs(dragDelta) > threshold;
+
+    if (shouldChange && dragDir) {
+        // ── Completar la animación hacia -90 / +90 ──
+        if (!foldLayer) {
+            // si por algún motivo no existe, simplemente cambiamos
+            if (dragDir === 'next') nextPage();
+            else prevPage();
+            dragDir = null;
+            return;
+        }
+
+        busy = true;
+        const endAngle = dragDir === 'next' ? -90 : 90;
+
+        foldLayer.style.transition = 'transform 0.28s cubic-bezier(0.25, 0, 0.35, 1)';
+        foldLayer.getBoundingClientRect();
+        foldLayer.style.transform = `rotateY(${endAngle}deg)`;
+
+        const capturedDir = dragDir;
+        dragDir = null;
+
+        foldLayer.addEventListener('transitionend', function onEnd() {
+            foldLayer.removeEventListener('transitionend', onEnd);
+            cleanFold();
+            const newIdx = capturedDir === 'next'
+                ? currentSpreadIdx + 1
+                : currentSpreadIdx - 1;
+            currentSpreadIdx = newIdx;
+            renderMagazine(spreads[currentSpreadIdx]);
+            buildDots();
+            busy = false;
+            playFlipSound();
+            updateUI();
+        }, { once: true });
+
+    } else {
+        // ── Regresar a posición original ──
+        if (foldLayer) {
+            foldLayer.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            foldLayer.getBoundingClientRect();
+            foldLayer.style.transform = 'rotateY(0deg)';
+
+            foldLayer.addEventListener('transitionend', function onBack() {
+                foldLayer.removeEventListener('transitionend', onBack);
+                cleanFold();
+            }, { once: true });
+        }
+        dragDir = null;
+    }
+    dragDelta = 0;
+}
+
+// ─────────────────────────────────────────────────────────
+// SONIDO
+// ─────────────────────────────────────────────────────────
+let flipAudio = null;
+function playFlipSound() {
+    if (!flipAudio) {
+        flipAudio = new Audio('https://www.soundjay.com/misc/sounds/page-flip-01.mp3');
+        flipAudio.volume = 0.2;
+    }
+    flipAudio.currentTime = 0;
+    flipAudio.play().catch(() => {});
+}
+
+let bgAudio = null;
+let soundEnabled = false;
+
+function initBgAudio() {
+    bgAudio = new Audio('musica.mp3');
+    bgAudio.loop = true;
+    bgAudio.volume = 0.3;
+    bgAudio.load();
+}
+
+function toggleSound() {
+    if (!bgAudio) initBgAudio();
+    if (soundEnabled) {
+        bgAudio.pause();
+        soundEnabled = false;
+    } else {
+        bgAudio.play().catch(() => {});
+        soundEnabled = true;
+    }
+    document.getElementById('ico-on').style.display  = soundEnabled ? '' : 'none';
+    document.getElementById('ico-off').style.display = soundEnabled ? 'none' : '';
+}
+
+// ─────────────────────────────────────────────────────────
+// ABRIR / CERRAR VISOR
+// ─────────────────────────────────────────────────────────
+function openVisor() {
+    document.getElementById('portada').style.display = 'none';
+    document.getElementById('visor').classList.add('active');
+    isDesktop = window.innerWidth >= 768;
+    spreads = buildSpreadsList(isDesktop);
+    currentSpreadIdx = 0;
+
+    // Precarga TODAS las imágenes; al terminar construye DOM fijo y renderiza
+    let loaded = 0;
+    const total = IMAGES.length;
+    let domBuilt = false;
+
+    function tryShow() {
+        loaded++;
+        if (loaded >= total && !domBuilt) {
+            domBuilt = true;
+            buildMagazineDOM();
+            renderMagazine(spreads[currentSpreadIdx]);
+            buildDots();
+            updateUI();
+        }
+    }
+
+    IMAGES.forEach(src => {
+        const img = new Image();
+        img.onload  = tryShow;
+        img.onerror = tryShow;
+        img.src = src;
+    });
+
+    // Fallback: si todas ya están en caché el navegador no dispara onload de forma asíncrona
+    // así que construimos inmediatamente también
+    if (!domBuilt) {
+        domBuilt = true;
+        buildMagazineDOM();
+        renderMagazine(spreads[currentSpreadIdx]);
+        buildDots();
+        updateUI();
+        // Las imágenes se siguen precargando en background
+    }
+}
+
+function closeVisor() {
+    cleanFold();
+    busy = false;
+    dragActive = false;
+    document.getElementById('visor').classList.remove('active');
+    document.getElementById('portada').style.display = '';
+    if (bgAudio) bgAudio.pause();
+    soundEnabled = false;
+    document.getElementById('ico-on').style.display  = '';
+    document.getElementById('ico-off').style.display = 'none';
+}
+
+// ─────────────────────────────────────────────────────────
+// EVENTOS — se registran cuando el DOM está completamente listo
+// ─────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function () {
+
+    // Botones principales
+    document.getElementById('btn-open').addEventListener('click', openVisor);
+    document.getElementById('btn-back').addEventListener('click', closeVisor);
+    document.getElementById('nav-prev-floating').addEventListener('click', prevPage);
+    document.getElementById('nav-next-floating').addEventListener('click', nextPage);
+    document.getElementById('nav-prev-mobile').addEventListener('click', prevPage);
+    document.getElementById('nav-next-mobile').addEventListener('click', nextPage);
+    document.getElementById('btn-audio').addEventListener('click', toggleSound);
+
+    // Drag en el magazine
+    const mag = document.getElementById('magazine');
+    mag.addEventListener('touchstart', startDrag, { passive: true });
+    mag.addEventListener('touchmove',  onDrag,    { passive: false });
+    mag.addEventListener('touchend',   endDrag);
+    mag.addEventListener('mousedown',  startDrag);
+    window.addEventListener('mousemove', (e) => { if (dragActive) onDrag(e); });
+    window.addEventListener('mouseup',   endDrag);
+
+    // Teclado
+    document.addEventListener('keydown', (e) => {
+        if (!document.getElementById('visor').classList.contains('active')) return;
+        if (e.key === 'ArrowRight') nextPage();
+        if (e.key === 'ArrowLeft')  prevPage();
+    });
+
+    // Responsive
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            const newDesktop = window.innerWidth >= 768;
+            if (newDesktop !== isDesktop && document.getElementById('visor').classList.contains('active')) {
+                const currentRealPage = spreads[currentSpreadIdx].pages[0];
+                cleanFold();
+                busy = false;
+                isDesktop = newDesktop;
+                spreads = buildSpreadsList(isDesktop);
+                let newIdx = spreads.findIndex(s => s.pages.includes(currentRealPage));
+                if (newIdx === -1) newIdx = 0;
+                currentSpreadIdx = newIdx;
+                // Reconstruir DOM fijo para el nuevo layout (single ↔ double)
+                buildMagazineDOM();
+                renderMagazine(spreads[currentSpreadIdx]);
+                buildDots();
+                updateUI();
+            } else {
+                isDesktop = newDesktop;
+            }
+        }, 200);
+    });
+
+    initBgAudio();
+});
+</script>
+</body>
+</html>
+</html>
